@@ -1,0 +1,26 @@
+import { NextResponse } from "next/server";
+import { callClaude } from "@/lib/claude"; // your Claude wrapper
+
+// A big instruction string telling Claude how to analyze problems
+const SYSTEM_PROMPT = `You are an AI Innovation Analyst...`;
+
+export async function POST(req: Request) {
+  try {
+    // 1. Read the JSON body from the request
+    const { problem } = await req.json();
+
+    // 2. If no problem is given, return an error
+    if (!problem || typeof problem !== "string") {
+      return NextResponse.json({ error: "Missing problem" }, { status: 400 });
+    }
+
+    // 3. Call Claude with the SYSTEM_PROMPT + problem
+    const result = await callClaude(SYSTEM_PROMPT, problem);
+
+    // 4. Send Claude’s JSON back to the frontend
+    return NextResponse.json(result);
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: "Analysis failed" }, { status: 500 });
+  }
+}
