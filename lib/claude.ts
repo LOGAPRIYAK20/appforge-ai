@@ -13,7 +13,11 @@ export async function callClaude(system: string, userMessage: string) {
       messages: [{ role: "user", content: userMessage }],
     }),
   });
+
   const data = await res.json();
-  const raw = data.content?.[0]?.text ?? "{}";
-  return JSON.parse(raw.replace(/```json|```/g, "").trim());
+
+  console.log("STATUS:", res.status);
+  console.log("DATA:", JSON.stringify(data, null, 2));
+
+  return data;
 }
