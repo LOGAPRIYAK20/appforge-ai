@@ -30,7 +30,7 @@ export default function IdeaEvolution({
             <p className="font-medium">{m.idea}</p>
 
             <p className="text-xs text-gray-500 mt-1">
-              Novelty {m.novelty_score}/10 — {m.why}
+              Novelty {m.novelty_score}/10
             </p>
           </button>
         ))}
