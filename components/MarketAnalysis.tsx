@@ -15,16 +15,28 @@ export default function MarketAnalysis({
         {result.domain} · {result.users}
       </p>
 
-      <div className="space-y-1 mb-5">
-        {result.competitors.map((c) => (
-          <div key={c.name} className="text-sm">
-            <span className="font-medium">
-              {c.name}
-            </span>
-            {" "}— {c.note}
-          </div>
-        ))}
-      </div>
+     <div className="space-y-1 mb-5">
+  {result.competitors.direct.map((c) => (
+    <div key={c} className="text-sm">
+      <span className="font-medium">{c}</span>
+      {" "}— Direct Competitor
+    </div>
+  ))}
+
+  {result.competitors.indirect.map((c) => (
+    <div key={c} className="text-sm">
+      <span className="font-medium">{c}</span>
+      {" "}— Indirect Competitor
+    </div>
+  ))}
+
+  {result.competitors.hidden.map((c) => (
+    <div key={c} className="text-sm">
+      <span className="font-medium">{c}</span>
+      {" "}— Hidden Competitor
+    </div>
+  ))}
+</div>
 
       <div className="flex gap-6">
         <div>
